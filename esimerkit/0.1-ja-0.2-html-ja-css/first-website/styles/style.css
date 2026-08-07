@@ -1,0 +1,50 @@
+html {
+  /* perus/oletus fonttikoko kaikkialla sivulla on 10 pikseliä */
+  font-size: 10px;
+  /* fonttiperheen saa halutun fontin valitsimen ominaisuudesta font-family
+  Google Fonts sivustolla */
+  font-family: "Roboto", sans-serif;
+  background-color: #2fa055;
+
+  h1 {
+    font-size: 60px;
+    text-align: center;
+  }
+
+  /* Laitetaan kaksi valitsinta, ne erotetaan pilkulla.
+  Eli nämä tyylisäännöt pätevät p ja li elementeille */
+  p,
+  li {
+    font-size: 14px;
+    line-height: 2;
+    letter-spacing: 1px;
+  }
+}
+
+body {
+  /* rungon leveys on aina 600px */
+  width: 600px;
+  /* kun antaa kaksi arvoa, eka arvo vaikuttaa alas ja ylös, toka arvo 
+    vaikuttaa vasemmalle ja oikealle (auto tasaa vas. ja oik. puolen) */
+  margin: 0 auto;
+  background-color: #ff9500;
+  /* ylhäällä ei ole täytettä, muualla on 20px */
+  padding: 0 20px 20px 20px;
+  /* rungon reunat on kaikkialla 5px ja mustia */
+  border: 5px solid black;
+}
+
+h1 {
+  margin: 0;
+  padding: 20px 0;
+  color: #2fa055;
+  text-shadow: 3px 3px 1px black;
+}
+
+/* img-elementti on Mozilla-ketun kuva tässä tapauksessa */
+img {
+  display: block;
+  /* auto tasaa vasemman ja oikean puolen kettu-logon sivuilla */
+  margin: 0 auto;
+  max-width: 100%;
+}
