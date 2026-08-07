@@ -1,7 +1,7 @@
-# Full Stack Open
+# Palautusrepositorio
 
-Tämä repositorio sisältää Helsingin yliopiston Full Stack Open-kurssin (https://fullstackopen.com/) tehtävien palautuksia.
+Sisältää kurssin tehtävien palautuksia.
 
-## Sisältö
+## Osien sisältö
 
 - Osa 0 – Web-sovellusten perusteet
