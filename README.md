@@ -1,7 +1,5 @@
 # Full Stack Open
 
-Tämä repositorio sisältää Helsingin yliopiston Full Stack Open-kurssin (https://fullstackopen.com/) tehtävien palautuksia ja kurssilla olleita esimerkkejä höystettynä käyttäjän roikander muokkauksilla.
+Tämä repositorio sisältää Helsingin yliopiston Full Stack Open-kurssin tehtäviin tekemiäni palautuksia/ratkaisuja sekä kurssimateriaalissa olleita esimerkkejä omilla muokkauksillani höystettynä.
 
-## Sisältö
-
-- Osa 0 – Web-sovellusten perusteet
+👉 **Kurssisivusto:** https://fullstackopen.com/
