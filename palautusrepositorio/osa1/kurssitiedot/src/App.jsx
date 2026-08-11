@@ -18,8 +18,8 @@ const Content = (props) => {
   )
 }
 
-// Part-komponentista luodaan kolme komponenttia,
-// koska sitä käytetään Contentissa kolme kertaa
+// Content käyttää Parttia kolme kertaa renderöintiin 
+// antaen joka renderöintiin eri parametrit/propsit.
 const Part = (props) => {
   return (
     <div>
@@ -34,7 +34,7 @@ const Total = (props) => {
   let total = props.parts[0].exercises +
               props.parts[1].exercises +
               props.parts[2].exercises
-
+              
   return (
     <div>
       <p>Number of exercises {total}</p>
@@ -45,27 +45,29 @@ const Total = (props) => {
 // App säilyttää sovelluksen dataa ja välittää lapsikomponenteille 
 // propsien avulla niiden tarvitseman datan
 const App = () => {
-  const course = 'Half Stack application development'
-  const parts = [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10
-    },
-    {
-      name: 'Using props to pass data',
-      exercises: 7
-    },
-    {
-      name: 'State of a component',
-      exercises: 14
-    }
-  ]
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
 
   return (
     <div>
-      <Header course={course} />
-      <Content parts={parts} />
-      <Total parts={parts} />
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
