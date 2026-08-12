@@ -13,5 +13,5 @@ HTML-dokumentti jossa opetellaan HTML-lomakkeen perusteita Mozillan tutoriaalin 
 #### 03-tervehdys
 Vitellä luotu React-sovellus, joka käsittelee muun muassa Javascript -ja JSX-kieltä, JS-olioita ja funktioita sekä React-komponentteja ja propseja.
 
-#### 04-ajastinlaskin
+#### 04-laskuri
 Vitellä luotu React-sovellus, jossa tulee tutuksi tilalliset komponentit ja tapahtumankäsittelijäfunktiot.

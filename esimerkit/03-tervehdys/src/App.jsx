@@ -1,4 +1,4 @@
-// Komponentti nimeltään Hello määriteltynä JS-funktiona eli () => {...},
+// Komponentti nimeltään Hello määriteltynä JS-funktiona eli () => ...,
 // joka sijoitetaan vakioarvoiseen muuttujaan Hello.
 // Hello sijoittaa destrukturoinnin avulla saamansa propsit suoraan muuttujiin
 // name ja age.
