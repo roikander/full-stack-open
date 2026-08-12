@@ -11,3 +11,4 @@ HTML-dokumentti jossa harjoitellaan HTML:n ja CSS:n perusteita Mozillan mdn-sivu
 HTML-dokumentti jossa opetellaan HTML-lomakkeen perusteita Mozillan tutoriaalin [Your first form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Your_first_form) johdolla.
 
 #### 03-eka-react-sovellus
+Käsittelee muun muassa Javascript -ja JSX-kieltä, JS-olioita -ja funktioita sekä React-komponentteja ja propseja.

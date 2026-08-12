@@ -1,12 +1,15 @@
 // Komponentti nimeltään Hello määriteltynä JS-funktiona eli () => {...},
 // joka sijoitetaan vakioarvoiseen muuttujaan Hello.
-// Se käyttää juurikomponentilta App parametreikseen saamiaan propseja.
-const Hello = (props) => {
-  // tulostaa dev toolsin konsoliin props-olion arvon 
-  console.log(props)
+// Hello sijoittaa destrukturoinnin avulla saamansa propsit suoraan muuttujiin
+// name ja age.
+const Hello = ({ name, age }) => {
+  const bornYear = () => new Date().getFullYear() - age
   return (
     <div>
-      Hello {props.name}, you are {props.age} years old
+      <p>
+        Hello {name}, you are {age} years old
+      </p>
+      <p>So you were probably born {bornYear()}</p>
     </div>
   )
 }
@@ -14,14 +17,14 @@ const Hello = (props) => {
 const Footer = () => {
   return (
     <div>
-      greeting app created by 
+      greeting app created by
       <a href="https://github.com/roikander">roikander</a>
     </div>
   )
 }
 
-// ylimpänä oleva juurikomponentti App käyttää alikomponenttia Hello, 
-// se myös renderöi sen ja lisäksi se renderöi otsikon h1
+// Ylimpänä oleva juurikomponentti App käyttää alikomponenttia Hello kaksi kertaa, 
+// se myös renderöi sen ja lisäksi se renderöi otsikon h1.
 const App = () => {
   const nimi = "Pekka"
   const ika = 10
