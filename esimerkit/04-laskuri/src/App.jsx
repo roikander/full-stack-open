@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-// Display saa ainoastaan propsin kentän counter joka on sovelluksen tila 
-// eli laskimen arvo, sen se renderöi, tiivis nuolifunktio mahdollinen koska
-// Display ei sisällä muuta kuin returnin
+// Display saa ainoastaan propsin kentän counter juurikomponentilta App, 
+// counter on sovelluksen tila eli laskimen arvo, sen Display renderöi, 
+// tiivis nuolifunktio mahdollinen, koska Display ei sisällä muuta kuin returnin
 const Display = ({ counter }) => <div>{counter}</div>
 
 // Button saa propsien avulla nappeihin tekstit jotka se renderöi, sekä
