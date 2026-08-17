@@ -15,3 +15,6 @@ Vitellä luotu React-sovellus, joka käsittelee muun muassa Javascript -ja JSX-k
 
 #### 04-laskuri
 Vitellä luotu React-sovellus, jossa tulee tutuksi tilalliset komponentit ja tapahtumankäsittelijät.
+
+#### 05-napin-painaja
+Vitellä luotu React-sovellus, jossa tarkastellaan komponenttia jossa on useampi tila ja niiden oikeaoppinen päivitys/muuttaminen riippuen ovatko ne tyypiltään muuttujia, olioita vai taulukoita. Sovellus myös demonstroi ehdollista renderöintiä komponentissa.
