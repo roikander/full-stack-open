@@ -8,3 +8,5 @@ Sovellus näyttää kurssin eri osien nimet ja tehtävämäärät. Siinä käyte
 
 #### unicafe
 Kyseessä on verkossa toimiva palautesovellus, siinä perehdytään erityisesti Reactin tilaan ja sen oikeaoppiseen päivittämiseen. Koodissa määritellään nuolifunktioita myös tiivissä muodossa, siinä tapauksessa jos ne sisältävät vain returnin.
+
+#### anekdootit
