@@ -21,8 +21,8 @@ const History = (props) => {
 }
 
 // Button saa propsien avulla nappeihin tekstit jotka se renderöi, sekä
-// joka napille asianmukaisen tapahtumankäsittelijän, tiivis nuolifunktio 
-// mahdollinen koska Button ei sisällä muuta kuin returnin
+// joka napille asianmukaisen tapahtumankäsittelijän propsin onClick avulla, 
+// tiivis nuolifunktio mahdollinen koska Button ei sisällä muuta kuin returnin
 const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
 const App = () => {

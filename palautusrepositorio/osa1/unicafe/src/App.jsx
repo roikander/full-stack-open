@@ -7,19 +7,23 @@ const Statistics = (props) => {
         <p>No feedback given</p>
       </div>
     )
-  } 
+  }
 
   return (
     <div>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.all}</p>
-      <p>average {props.average}</p>
-      <p>positive {props.positive} %</p>
+      <StatisticLine text="good" value={props.good} />
+      <StatisticLine text="neutral" value={props.neutral} />
+      <StatisticLine text="bad" value={props.bad} />
+      <StatisticLine text="all" value={props.all} />
+      <StatisticLine text="average" value={props.average} />
+      <StatisticLine text="positive" value={props.positive} />
     </div>
   )
 }
+
+const StatisticLine = ({ text, value }) => <p>{text} {value}</p>
+
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -30,7 +34,7 @@ const App = () => {
   const [average, setAverage] = useState(0)
   const [positive, setPositive] = useState(0)
 
-  const h2ndleGoodClick = () => {
+  const handleGoodClick = () => {
     const updatedGood = good + 1
     setGood(updatedGood)
 
@@ -45,7 +49,7 @@ const App = () => {
     setPositive(updatedGood / updatedAll * 100)
   }
 
-  const h2ndleNeutralClick = () => {
+  const handleNeutralClick = () => {
     const updatedNeutral = neutral + 1
     setNeutral(updatedNeutral)
 
@@ -55,7 +59,7 @@ const App = () => {
     setPositive(good / updatedAll * 100)
   }
 
-  const h2ndleBadClick = () => {
+  const handleBadClick = () => {
     const updatedBad = bad + 1
     setBad(updatedBad)
 
@@ -75,9 +79,9 @@ const App = () => {
       <h1>give feedback</h1>
 
       <div>
-        <button onClick={h2ndleGoodClick}>good</button>
-        <button onClick={h2ndleNeutralClick}>neutral</button>
-        <button onClick={h2ndleBadClick}>bad</button>
+        <Button onClick={handleGoodClick} text='good' />
+        <Button onClick={handleNeutralClick} text='neutral' />
+        <Button onClick={handleBadClick} text='bad' />
       </div>
 
       <h1>statistics</h1>
