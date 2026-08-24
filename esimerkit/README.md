@@ -18,3 +18,5 @@ Vitellä luotu React-sovellus, jossa tulee tutuksi tilalliset komponentit ja tap
 
 #### 05-napin-painaja
 Vitellä luotu React-sovellus, jossa tarkastellaan komponenttia jossa on useampi tila ja niiden oikeaoppinen päivitys/muuttaminen riippuen ovatko ne tyypiltään muuttujia, olioita vai taulukoita. Sovellus myös demonstroi ehdollista renderöintiä komponentissa.
+
+#### 06-napin-painaja
