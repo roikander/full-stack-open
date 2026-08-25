@@ -1,24 +1,32 @@
-const Part = ({ name, exercises }) => {
+// Total renderöi tehtävien yhteismäärän. Ei voida toteuttaa tiiviinä
+// nuolifunktiona, koska sisältää muutakin kuin returnin.
+const Total = ({ parts }) => {
+  const exercises = parts.map(part => part.exercises)
+  const total = exercises.reduce((acc, x) => acc + x, 0)
+
   return (
     <div>
-      <p>{name} {exercises}</p>
+      <b>total of {total} exercises</b>
     </div>
   )
 }
 
-// Jokainen Contentin renderöimä Part-komponentti (ylhäällä)
+// Jokainen Contentin renderöimä Part-komponentti 
 // renderöi yhden kurssin osan nimen ja tehtävien lukumäärän.
-const Content = ({ parts }) => {
-  return (
-    <div>
-      {parts.map(part => 
-        <Part key={part.id} name={part.name} exercises={part.exercises} />
-      )}
-    </div>
-  )
-}
+const Part = ({ name, exercises }) => (
+  <p>{name} {exercises}</p>
+)
 
-// tiivis nuolifunktio mahdollinen koska Header ei sisällä muuta kuin returnin
+// tiivis nuolifunktio 
+const Content = ({ parts }) => (
+  <div>
+    {parts.map(part =>
+      <Part key={part.id} name={part.name} exercises={part.exercises} />
+    )}
+  </div>
+)
+
+// äärimmäisen tiivis nuolifunktio  
 const Header = ({ course }) => <h1>{course}</h1>
 
 // Course sisältää komponentit (Header ja Content), 
@@ -28,6 +36,7 @@ const Course = (props) => {
     <div>
       <Header course={props.course.name} />
       <Content parts={props.course.parts} />
+      <Total parts={props.course.parts} />
     </div>
   )
 }
@@ -51,6 +60,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
