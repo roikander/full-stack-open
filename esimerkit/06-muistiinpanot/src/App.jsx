@@ -1,17 +1,70 @@
+import { useState } from 'react'
 import Note from './components/Note'
 
-const App = ({ notes }) => {
-  // Suorittaa jokaiselle notes-taulukon alkiolle sulkeisiin määritellyn funktion,
-  // eli lähettää Note-komponentille muistiinpanon id-kentän avaimeksi, jotta
-  // renderöinti sujuu ok. Se myös lähettää itse muistiinpano-olion Notelle.
+const App = (props) => {
+  // Jotta sivu päivittyy oikein kun uusia muistiinpanoja lisätään on parasta
+  // sijoittaa muistiinpanot komponentin App tilaan, joka saa aluksi arvokseen 
+  // propsina tiedostosta main.jsx alustavan muistiinpanot-taulukon
+  const [notes, setNotes] = useState(props.notes)
+  // tila lomakkeen syötettä varten
+  const [newNote, setNewNote] = useState('a new note...')
+  const [showAll, setShowAll] = useState(true)
+
+  // tapahtumankäsittelijä JSX-osiossa olevan lomakkeen tapahtumaan onSubmit
+  // event.preventDefault() estää lomakkeen lähetyksen oletusarvoisen toiminnan,
+  // joka aiheuttaisi mm. sivun uudelleenlatautumisen
+  const addNote = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+    const noteObject = {
+      content: newNote,
+      important: Math.random() > 0.5,
+      id: String(notes.length + 1),
+    }
+
+    setNotes(notes.concat(noteObject))
+    setNewNote('')
+  }
+
+  // synkronoi syötekenttään tehdyt muutokset komponentin App tilaan newNote
+  // event.target.value on lomakkeen syötekentässä sillä hetkellä oleva arvo
+  const handleNoteChange = (event) => {
+    console.log(event.target.value)
+    setNewNote(event.target.value)
+  }
+
+  // Jos ehto showAll on true näytä kaikki muistiinpanot jos showAll on false
+  // näytä vain muistiinpanot joiden kenttä important on true.
+  // JSX:ssä on nappi jolla voi säätää tilan showAll arvoa, 
+  // tapahtumankäsittelijä on suoraan napissa, NOT-operaattori (!) muuttaa
+  // showAll-tilan päinvastaiseksi, napin teksti riippuu showAll-arvosta:
+  // show {showAll ? 'important' : 'all'}
+  const notesToShow = showAll
+    ? notes
+    : notes.filter(note => note.important)
+
+  // Metodi map() suorittaa jokaiselle notes-taulukon alkiolle sulkeisiin 
+  // määritellyn funktion, eli lähettää Note-komponentille muistiinpanon 
+  // id-kentän avaimeksi, jotta renderöinti sujuu ok. 
+  // Se myös lähettää itse muistiinpano-olion Notelle.
+  console.log(notes)
   return (
     <div>
       <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all'}
+        </button>
+      </div>
       <ul>
-        {notes.map(note =>
+        {notesToShow.map(note =>
           <Note key={note.id} note={note} />
         )}
       </ul>
+      <form onSubmit={addNote}>
+        <input value={newNote} onChange={handleNoteChange} />
+        <button type="submit">save</button>
+      </form>
     </div>
   )
 }
