@@ -20,4 +20,4 @@ Vitellä luotu React-sovellus, jossa tulee tutuksi tilalliset komponentit ja tap
 Vitellä luotu React-sovellus, jossa tarkastellaan komponenttia jossa on useampi tila ja niiden oikeaoppinen päivitys/muuttaminen riippuen ovatko ne tyypiltään muuttujia, olioita vai taulukoita. Sovellus myös demonstroi ehdollista renderöintiä komponentissa.
 
 #### 06-muistiinpanot
-Sisältää kurssin osassa 0 olleen muistiinpanosovelluksen [Notes -- single page app](https://studies.cs.helsinki.fi/exampleapp/spa) selainpuolen sovelluslogiikan. Se käsittelee taulukoiden renderöintiä, metodeita map() ja filter(), lomakkeita ja niihin liittyviä syötekomponentteja.
+Sisältää kurssin osassa 0 olleen muistiinpanosovelluksen [Notes -- single page app](https://studies.cs.helsinki.fi/exampleapp/spa) selainpuolen sovelluslogiikan. Se käsittelee taulukoiden renderöintiä, metodeita map() ja filter(), lomakkeita ja niihin liittyviä syötekomponentteja. Tutuksi tulee myös JSON Server, Axios ja Effect-hookit ja niiden avulla toteutettu palvelimella olevan datan hakeminen.

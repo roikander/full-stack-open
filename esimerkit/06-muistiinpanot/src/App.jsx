@@ -1,14 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Note from './components/Note'
 
 const App = (props) => {
   // Jotta sivu päivittyy oikein kun uusia muistiinpanoja lisätään on parasta
-  // sijoittaa muistiinpanot komponentin App tilaan, joka saa aluksi arvokseen 
-  // propsina tiedostosta main.jsx alustavan muistiinpanot-taulukon
-  const [notes, setNotes] = useState(props.notes)
+  // sijoittaa muistiinpanot komponentin App tilaan
+  const [notes, setNotes] = useState([])
   // tila lomakkeen syötettä varten
-  const [newNote, setNewNote] = useState('a new note...')
+  const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
+
+  // ensin suoritetaan komponentin runko(myös efektin jälkeinen loggaus), heti 
+  // sen jälkeen suoritetaan efekti/funktio joka hakee datan palvelimelta
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+  }, [])
+  console.log('render', notes.length, 'notes')
 
   // tapahtumankäsittelijä JSX-osiossa olevan lomakkeen tapahtumaan onSubmit
   // event.preventDefault() estää lomakkeen lähetyksen oletusarvoisen toiminnan,
@@ -47,7 +60,6 @@ const App = (props) => {
   // määritellyn funktion, eli lähettää Note-komponentille muistiinpanon 
   // id-kentän avaimeksi, jotta renderöinti sujuu ok. 
   // Se myös lähettää itse muistiinpano-olion Notelle.
-  console.log(notes)
   return (
     <div>
       <h1>Notes</h1>
