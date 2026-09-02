@@ -10,8 +10,10 @@ const App = (props) => {
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
-  // ensin suoritetaan komponentin runko(myös efektin jälkeinen loggaus), heti 
-  // sen jälkeen suoritetaan efekti/funktio joka hakee datan palvelimelta
+  // Ensin suoritetaan komponentin runko(myös efektin jälkeinen loggaus), heti 
+  // sen jälkeen suoritetaan efekti/funktio joka hakee datan palvelimelta.
+  // Lopussa oleva parametri [] tarkoittaa että suoritetaan efekti 
+  // ainoastaan komponentin ensimmäisen renderöinnin jälkeen.
   useEffect(() => {
     console.log('effect')
     axios
