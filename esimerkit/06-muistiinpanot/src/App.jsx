@@ -38,7 +38,7 @@ const App = (props) => {
     }
 
     // noteObject lähetetään/lisätään palvelimelle tiedostoon db.json axioksen
-    // metodilla post moduulissa noteService funktiolla create 
+    // metodilla post, moduulissa noteService, funktiolla create 
     noteService
       .create(noteObject)
       .then(returnedNote => {
