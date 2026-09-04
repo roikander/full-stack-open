@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
 
-const App = (props) => {
+const App = () => {
   // Jotta sivu päivittyy oikein kun uusia muistiinpanoja lisätään on parasta
   // sijoittaa muistiinpanot komponentin App tilaan
   const [notes, setNotes] = useState([])
@@ -50,7 +50,7 @@ const App = (props) => {
   // Tapahtumankäsittelijä joka varsinaisesti muuttaa muistiinpanon tärkeyden,
   // muuttamalla kentän important päinvastaiseksi jos id mätsää.
   // Muutoksen jälkeen uusi muistiinpano lähetetään PUT-pyynnöllä korvaamaan 
-  // vanha, axioksen put-metodilla moduulissa noteService sen funktiolla update.
+  // vanha axioksen put-metodilla moduulissa noteService sen funktiolla update.
   // Lopussa on virheenkäsittelijä toteutettu metodilla catch.
   const toggleImportanceOf = id => {
     const note = notes.find(n => n.id === id)

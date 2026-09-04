@@ -31,13 +31,25 @@ const App = () => {
       alert(`${newName} is already added to phonebook`)
       return
     }
-    
+
     personService
       .create(personObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
+      })
+  }
+
+  const removePerson = (id, name) => {
+    if (!window.confirm(`Delete ${name} ?`)) {
+      return
+    }
+
+    personService
+      .remove(id)
+      .then(() => {
+        setPersons(persons.filter(person => person.id !== id))
       })
   }
 
@@ -76,7 +88,7 @@ const App = () => {
 
       <h3>Numbers</h3>
 
-      <Person personToShow={personToShow} />
+      <Person personToShow={personToShow} removePerson={removePerson} />
     </div>
   )
 }
