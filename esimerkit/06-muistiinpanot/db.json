@@ -22,12 +22,12 @@
     },
     {
       "content": "JSON server in action",
-      "important": true,
+      "important": false,
       "id": "zEX0ZJ1"
     },
     {
       "content": "Testing create function",
-      "important": true,
+      "important": false,
       "id": "rZDtWDJ"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "content": "Is it still working?",
-      "important": false,
+      "important": true,
       "id": "r0WdNX9"
     }
   ]

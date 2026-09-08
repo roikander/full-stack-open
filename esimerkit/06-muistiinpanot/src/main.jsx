@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client'
 // importtaa komponentti App nykyisestä kansiosta App(./)
 import App from './App'
+import './index.css'
 
 // renderöi App.jsx:stä saamansa App-komponentin 
 // tiedoston index.html div id:hen "root"
