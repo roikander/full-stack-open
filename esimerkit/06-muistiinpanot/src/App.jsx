@@ -4,7 +4,6 @@ import Note from './components/Note'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
 
-
 const App = () => {
   // Jotta sivu päivittyy oikein kun uusia muistiinpanoja lisätään on parasta
   // sijoittaa muistiinpanot komponentin App tilaan
