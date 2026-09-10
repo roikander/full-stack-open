@@ -21,3 +21,6 @@ Vitellä luotu React-sovellus, jossa tarkastellaan komponenttia jossa on useampi
 
 #### 06-muistiinpanot
 Sisältää kurssin osassa 0 olleen muistiinpanosovelluksen [Notes -- single page app](https://studies.cs.helsinki.fi/exampleapp/spa) selainpuolen sovelluslogiikan. Se käsittelee taulukoiden renderöintiä, metodeita map() ja filter(), lomakkeita ja niihin liittyviä syötekomponentteja. Tutuksi tulee myös JSON Server, Axios ja Effect-hookit ja niiden avulla toteutettu palvelimella olevan datan hakeminen ja muokkaaminen. Myös catch-metodilla toteutettu virheenkäsittelijä on sovelluksessa läsnä, virheilmoitus annetaan ilmoitukseen määritellyllä komponentilla. CSS-tyylejä on lisätty perinteisesti ja inline-tyyleillä suoraan alikomponenttiin.
+
+#### 07-notebackend
+Kyseessä on Nodella Expess-kirjastoa apuna käyttäen luotu web-palvelin, jolla voi toteuttaa HTTP-pyyntöjä ja vastauksia. Sovelluksessa myös käytetään VSCoden  REST client laajennusta ja sen tiedostoja palvelimen testaukseen.
