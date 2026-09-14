@@ -1,7 +1,7 @@
 # Esimerkit
 
 Sisältää Full Stack Open-kurssin sekä Mozillan mdn-sivuston esimerkkejä ja tehtäviä minun muokkauksilla höystettynä.
-Sovellusten kommenteihin olen lisännyt muistiinpanojani ja oivalluksia, joten ne voivat ajoittain olla pidemmänpuoloisia.
+Sovellusten kommenteihin olen lisännyt kurssin tekstejä sekä muistiinpanojani ja oivalluksia, joten ne voivat ajoittain olla pidemmänpuoloisia.
 
 #### 01-html-ja-css
 HTML-dokumentti jossa harjoitellaan HTML:n ja CSS:n perusteita Mozillan mdn-sivustolla olevien ohjeiden
@@ -23,4 +23,4 @@ Vitellä luotu React-sovellus, jossa tarkastellaan komponenttia jossa on useampi
 Sisältää kurssin osassa 0 olleen muistiinpanosovelluksen [Notes -- single page app](https://studies.cs.helsinki.fi/exampleapp/spa) selainpuolen sovelluslogiikan. Se käsittelee taulukoiden renderöintiä, metodeita map() ja filter(), lomakkeita ja niihin liittyviä syötekomponentteja. Tutuksi tulee myös JSON Server, Axios ja Effect-hookit ja niiden avulla toteutettu palvelimella olevan datan hakeminen ja muokkaaminen. Myös catch-metodilla toteutettu virheenkäsittelijä on sovelluksessa läsnä, virheilmoitus annetaan ilmoitukseen määritellyllä komponentilla. CSS-tyylejä on lisätty perinteisesti ja inline-tyyleillä suoraan alikomponenttiin.
 
 #### 07-notebackend
-Kyseessä on Nodella Expess-kirjastoa apuna käyttäen luotu web-palvelin, jolla voi toteuttaa HTTP-pyyntöjä ja vastauksia. Sovelluksessa myös käytetään VSCoden  REST client laajennusta ja sen tiedostoja palvelimen testaukseen.
+Kyseessä on Nodella Express-kirjastoa apuna käyttäen luotu web-palvelin, jolla voi toteuttaa HTTP-pyyntöjä ja vastauksia. Sovelluksessa käytetään myös VSCoden  REST client laajennusta ja sen tiedostoja palvelimen testaukseen.
