@@ -24,6 +24,10 @@ let persons = [
   }
 ]
 
+const getRandomInt = (max) => {
+  return Math.floor(Math.random() * max)
+}
+
 app.use(express.json())
 
 app.get('/', (request, response) => {
@@ -56,6 +60,20 @@ app.delete('/api/persons/:id', (request, response) => {
   persons = persons.filter(person => person.id !== id)
   
   response.status(204).end()
+})
+
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+  
+  const person = {
+    id: JSON.stringify(getRandomInt(100000)),
+    name: body.name,
+    number: body.number
+  }
+
+  persons = persons.concat(person)
+
+  response.json(person)
 })
 
 const PORT = 3001

@@ -4,4 +4,4 @@
 Tehtävissä luodaan palvelimella olevaa toiminnallisuutta Nodella, apuna käytetään Express-kirjastoa.
 
 #### puhelinluettelon-backend
-Palvelin joka vastailee käyttäjän esittämiin pyyntöihin.
+Palvelin joka vastailee käyttäjän esittämiin HTTP-pyyntöihin sopivilla status-koodeilla, voi hakea haluttuja resursseja(henkilötietoja) sekä poistaa ja lisätä uusia.
