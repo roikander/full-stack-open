@@ -1,93 +1,91 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
 let persons = [
   {
     id: "1",
     name: "Arto Hellas",
-    number: "040-123456"
+    number: "040-123456",
   },
   {
     id: "2",
     name: "Ada Lovelace",
-    number: "39-44-5323523"
+    number: "39-44-5323523",
   },
   {
     id: "3",
     name: "Dan Abramov",
-    number: "12-43-2345"
+    number: "12-43-2345",
   },
   {
     id: "4",
     name: "Mary Poppendieck",
-    number: "39-23-6423122"
-  }
-]
+    number: "39-23-6423122",
+  },
+];
 
 const getRandomInt = (max) => {
-  return Math.floor(Math.random() * max)
-}
+  return Math.floor(Math.random() * max);
+};
 
-app.use(express.json())
+app.use(express.json());
 
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
-})
+app.get("/", (request, response) => {
+  response.send("<h1>Hello World!</h1>");
+});
 
-app.get('/api/persons', (request, response) => {
-  response.json(persons)
-})
+app.get("/api/persons", (request, response) => {
+  response.json(persons);
+});
 
-app.get('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  const person = persons.find(person => person.id === id)
+app.get("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  const person = persons.find((person) => person.id === id);
 
   if (person) {
-    response.json(person)
+    response.json(person);
   } else {
-    response.status(404).end()
+    response.status(404).end();
   }
-})
+});
 
-app.get('/info', (request, response) => {
-  response.send
-  (`<p>Phonebook has info for ${persons.length} people</p>
-    <p>${new Date()}</p>`)
-})
+app.get("/info", (request, response) => {
+  response.send(`<p>Phonebook has info for ${persons.length} people</p>
+    <p>${new Date()}</p>`);
+});
 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-  persons = persons.filter(person => person.id !== id)
-  
-  response.status(204).end()
-})
+app.delete("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  persons = persons.filter((person) => person.id !== id);
 
-app.post('/api/persons', (request, response) => {
-  const body = request.body
-  console.log(body)
+  response.status(204).end();
+});
 
-if (!body.name || !body.number) {
-    return response.status(400).json({ 
-      error: 'name or number missing'    
-    })  
-} else if (persons.some(person => person.name === body.name)) {
-    return response.status(400).json({ 
-      error: 'name must be unique'    
-    })  
-}
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "name or number missing",
+    });
+  } else if (persons.some((person) => person.name === body.name)) {
+    return response.status(400).json({
+      error: "name must be unique",
+    });
+  }
 
   const person = {
     id: JSON.stringify(getRandomInt(100000)),
     name: body.name,
-    number: body.number
-  }
+    number: body.number,
+  };
 
-  persons = persons.concat(person)
+  persons = persons.concat(person);
 
-  response.json(person)
-})
+  response.json(person);
+});
 
-const PORT = 3001
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on portti ${PORT}`)
-})
+const PORT = 3001;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on portti ${PORT}`);
+});
