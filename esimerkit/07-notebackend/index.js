@@ -1,7 +1,10 @@
-// Otetaan käyttöön express, joka on tällä kertaa funktio, jota kutsumalla
-// luodaan muuttujaan app sijoitettava Express-sovellusta vastaava olio.
+// expressin avulla palvelimen koodaus on jouhevampaa
 const express = require("express");
 const app = express();
+
+// corssin ansiosta selain saa palvelimelta dataa
+const cors = require('cors')
+app.use(cors())
 
 let notes = [
   {
@@ -35,6 +38,10 @@ const requestLogger = (request, response, next) => {
 // Expressin json-parser käyttöön -> lähettettyyn dataan pääsee helposti käsiksi
 app.use(express.json());
 app.use(requestLogger);
+// Jotta saamme Expressin näyttämään staattista sisältöä eli sivun index.html
+// ja sen lataaman JavaScriptin ym. tarvitsemme Expressiin sisäänrakennettua 
+// middlewarea static.
+app.use(express.static('dist'))
 
 // Tapahtumankäsittelijäfunktiolla on kaksi parametria. Näistä ensimmäinen eli
 // request sisältää kaikki HTTP-pyynnön tiedot ja toisen parametrin response:n
@@ -110,7 +117,9 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint);
 
-const PORT = 3001;
+// käyttöön tulee ympäristömuuttujassa PORT määritelty portti tai 3001, 
+// jos ympäristömuuttuja PORT ei ole määritelty.
+const PORT = process.env.PORT || 3001
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
