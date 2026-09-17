@@ -2,10 +2,6 @@
 const express = require("express");
 const app = express();
 
-// corssin ansiosta selain saa palvelimelta dataa
-const cors = require('cors')
-app.use(cors())
-
 let notes = [
   {
     id: "1",
@@ -24,8 +20,8 @@ let notes = [
   },
 ];
 
-// Itse määritelty middleware, joka tulostaa npm-konsoliin 
-// palvelimelle tulevien pyyntöjen perustietoja, 
+// Itse määritelty middleware, joka tulostaa npm-konsoliin
+// palvelimelle tulevien pyyntöjen perustietoja,
 // lopussa oleva next() siirtää kontrollin seuraavalle middlewarelle.
 const requestLogger = (request, response, next) => {
   console.log("Method:", request.method);
@@ -38,11 +34,11 @@ const requestLogger = (request, response, next) => {
 // Expressin json-parser käyttöön -> lähettettyyn dataan pääsee helposti käsiksi
 app.use(express.json());
 app.use(requestLogger);
-// Tarvitaan Expressin middleware static, jotta saa renderöityä tiedoston 
-// index.html joka sisältää elementin root, jonka kautta sovellus pääsee 
+// Tarvitaan Expressin middleware static, jotta saa renderöityä tiedoston
+// index.html joka sisältää elementin root, jonka kautta sovellus pääsee
 // käsiksi komponenttiin App, joka sisältää esim. muistiinpanot, em. seurauksena
 // pyyntö juureen ei renderöi <h1>Hello World!</h1> vaan komponentin App.
-app.use(express.static('dist'))
+app.use(express.static("dist"));
 
 // Tapahtumankäsittelijäfunktiolla on kaksi parametria. Näistä ensimmäinen eli
 // request sisältää kaikki HTTP-pyynnön tiedot ja toisen parametrin response:n
@@ -110,7 +106,7 @@ app.post("/api/notes", (request, response) => {
   response.json(note);
 });
 
-// Middleware jonka ansiosta saadaan polkujen käsittelemättömistä 
+// Middleware jonka ansiosta saadaan polkujen käsittelemättömistä
 // virhetilanteista JSON-muotoinen virheilmoitus.
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
@@ -118,9 +114,9 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint);
 
-// käyttöön tulee ympäristömuuttujassa PORT määritelty portti tai 3001, 
+// käyttöön tulee ympäristömuuttujassa PORT määritelty portti tai 3001,
 // jos ympäristömuuttuja PORT ei ole määritelty.
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
