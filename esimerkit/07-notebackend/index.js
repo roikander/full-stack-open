@@ -114,8 +114,8 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint);
 
-// käyttöön tulee ympäristömuuttujassa PORT määritelty portti tai 3001,
-// jos ympäristömuuttuja PORT ei ole määritelty.
+// käyttöön tulee ympäristömuuttujassa PORT määritelty portti tai 
+// 3001 jos ympäristömuuttuja PORT ei ole määritelty.
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);

@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-const cors = require('cors')
+const cors = require("cors");
 
 let persons = [
   {
@@ -31,8 +31,8 @@ const getRandomInt = (max) => {
 };
 
 app.use(express.json());
-app.use(morgan('tiny'))
-app.use(cors())
+app.use(morgan("tiny"));
+app.use(cors());
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
@@ -66,6 +66,7 @@ app.delete("/api/persons/:id", (request, response) => {
 });
 
 app.post("/api/persons", (request, response) => {
+  console.log(request.body);
   const body = request.body;
 
   if (!body.name || !body.number) {
@@ -89,7 +90,7 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on portti ${PORT}`);
 });
