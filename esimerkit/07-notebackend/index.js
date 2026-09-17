@@ -38,9 +38,10 @@ const requestLogger = (request, response, next) => {
 // Expressin json-parser käyttöön -> lähettettyyn dataan pääsee helposti käsiksi
 app.use(express.json());
 app.use(requestLogger);
-// Jotta saamme Expressin näyttämään staattista sisältöä eli sivun index.html
-// ja sen lataaman JavaScriptin ym. tarvitsemme Expressiin sisäänrakennettua 
-// middlewarea static.
+// Tarvitaan Expressin middleware static, jotta saa renderöityä tiedoston 
+// index.html joka sisältää elementin root, jonka kautta sovellus pääsee 
+// käsiksi komponenttiin App, joka sisältää esim. muistiinpanot, em. seurauksena
+// pyyntö juureen ei renderöi <h1>Hello World!</h1> vaan komponentin App.
 app.use(express.static('dist'))
 
 // Tapahtumankäsittelijäfunktiolla on kaksi parametria. Näistä ensimmäinen eli
@@ -50,7 +51,7 @@ app.get("/", (request, response) => {
   response.send("<h1>Hello World!</h1>");
 });
 
-// Polkuun /api/notes tulleisiin pyyntöihin vastataan muistiinpanot taulukolla,
+// Polkuun /api/notes ja tulleisiin pyyntöihin vastataan muistiinpanot taulukolla,
 // joka muutetaan response-olion json-metodilla JSON-muotoiseksi merkkijonoksi.
 app.get("/api/notes", (request, response) => {
   response.json(notes);

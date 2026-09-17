@@ -1,13 +1,22 @@
+<!-- Sisältää ohjeen ladata sovelluksen tyylit määrittelevän
+CSS-tiedoston, sekä kaksi script-tagia, joiden ansiosta selain
+lataa sovelluksen JS-koodin, eli varsinaisen React-sovelluksen. -->
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + React</title>
+</head>
+
+<!-- hakee root-elementin jonka se löytää tiedostosta main.jsx, 
+ main.jsx saa itse root-elementin tiedostosta App.jsx, 
+ root-elementti eli komponentti App sisältää esim. muistiinpanot -->
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

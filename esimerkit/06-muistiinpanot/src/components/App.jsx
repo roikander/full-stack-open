@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import noteService from './services/notes'
-import Note from './components/Note'
-import Notification from './components/Notification'
-import Footer from './components/Footer'
+import noteService from '../services/notes'
+import Note from './Note'
+import Notification from './Notification'
+import Footer from './Footer'
 
 const App = () => {
   // Jotta sivu päivittyy oikein kun uusia muistiinpanoja lisätään on parasta
