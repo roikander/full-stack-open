@@ -4,7 +4,7 @@ Tämä repositorio sisältää Helsingin yliopiston Full Stack Open-kurssin teht
 
 👉 **Kurssisivusto:** https://fullstackopen.com/
 
-Kursilla tekemäni puhelinluettelosovellus, joka on viety Internetiin hostauspalvelulla nimeltä Render.
+Kurssilla tekemäni puhelinluettelosovellus, joka on viety Internetiin hostauspalvelulla nimeltä Render.
 
 👉 **Phonebook:** https://full-stack-open-lc9q.onrender.com/
 
