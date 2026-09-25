@@ -14,8 +14,8 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
 
   // Ensin suoritetaan komponentin runko(myös efektin jälkeinen loggaus), heti 
-  // sen jälkeen suoritetaan efekti/funktio getAll() joka hakee datan palvelimelta
-  // Lopussa oleva parametri [] tarkoittaa että suoritetaan efekti 
+  // sen jälkeen suoritetaan efekti/funktio getAll() joka hakee datan
+  // palvelimelta, Lopussa oleva parametri [] tarkoittaa että suoritetaan efekti 
   // ainoastaan komponentin ensimmäisen renderöinnin jälkeen.
   useEffect(() => {
     console.log('effect')
@@ -31,10 +31,9 @@ const App = () => {
   // Tapahtumankäsittelijä JSX-osiossa olevan lomakkeen tapahtumaan onSubmit,
   // event.preventDefault() estää lomakkeen lähetyksen oletusarvoisen toiminnan,
   // joka aiheuttaisi mm. sivun uudelleenlatautumisen, id-kentän generointi on 
-  // parempi jättää palvelimen vastuulle moduulissa NoteService funktiossa create.
+  // parempi jättää palvelimen vastuulle moduulin NoteService funktiossa create.
   const addNote = (event) => {
     event.preventDefault()
-    console.log('button clicked', event.target)
     const noteObject = {
       content: newNote,
       important: Math.random() > 0.5,
@@ -78,7 +77,6 @@ const App = () => {
   // synkronoi syötekenttään tehdyt muutokset komponentin App tilaan newNote
   // event.target.value on lomakkeen syötekentässä sillä hetkellä oleva arvo
   const handleNoteChange = (event) => {
-    console.log(event.target.value)
     setNewNote(event.target.value)
   }
 

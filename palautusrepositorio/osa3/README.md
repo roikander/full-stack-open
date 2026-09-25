@@ -5,4 +5,4 @@ Tehtävissä luodaan palvelimella olevaa toiminnallisuutta Nodella, apuna käyte
 
 #### puhelinluettelon-backend
 Palvelin joka vastailee käyttäjän esittämiin HTTP-pyyntöihin sopivilla status-koodeilla, voi hakea haluttuja resursseja(henkilötietoja) sekä poistaa ja lisätä uusia. Sovelluksessa on mukana loggausta tekevä middleware nimeltä morgan.
-Toimii yhdessä sovelluksen frontendin kanssa (osa2-tehtävä-puhelinluettelo) muodostaen full stackin, ne on viety Internetiin hostauspalvelulla nimeltä Render.
+Toimii yhdessä sovelluksen frontendin kanssa (osa2-tehtävä-puhelinluettelo) muodostaen full stackin, ne on viety Internetiin hostauspalvelulla nimeltä Render. Datan käsittelyä on toteutettu MongoDB-tietokannalla.
