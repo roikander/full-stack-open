@@ -20,7 +20,6 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
-app.use(requestLogger);
 // Tarvitaan Expressin middleware static, jotta saa renderöityä tiedoston
 // index.html joka sisältää elementin root, jonka kautta sovellus pääsee
 // käsiksi komponenttiin App, joka sisältää esim. muistiinpanot, em. seurauksena
@@ -28,6 +27,7 @@ app.use(requestLogger);
 app.use(express.static("dist"));
 // Expressin json-parser käyttöön -> lähettettyyn dataan pääsee helposti käsiksi
 app.use(express.json());
+app.use(requestLogger);
 
 // Tapahtumankäsittelijäfunktiolla on kaksi parametria. Näistä ensimmäinen eli
 // request sisältää kaikki HTTP-pyynnön tiedot ja toisen parametrin response:n
@@ -47,12 +47,20 @@ app.get("/api/notes", (request, response) => {
 
 // Yksittäisen resurssin voi hakea antamalla polkuun/URLiin kaksoispisteen
 // jälkeen haettavasta kohteesta löytyvä parametri (tässä id),
-// käsiksi siihen päästään request-olion avulla.
-app.get("/api/notes/:id", (request, response) => {
-  Note.findById(request.params.id).then((note) => {
-    response.json(note);
-  });
-});
+// käsiksi siihen päästään Mongoosen Model.findById() ja request-olion avulla.
+// Jos haettua id:tä ei löydy palautetaan virhekoodi 404, jos haettu id on 
+// väärässä muodossa funktio next siirtää virhetilanteen virheidenkäsittelijälle.
+app.get('/api/notes/:id', (request, response, next) => {
+  Note.findById(request.params.id)
+    .then(note => {
+      if (note) {
+        response.json(note)
+      } else {
+        response.status(404).end()
+      }
+    })
+    .catch(error => next(error))
+})
 
 // Uusi muistiinpano lisätään POST-pyynnöllä, jos kenttä content puuttuu -> 400.
 // Note-rakentajafunktio luo uuden note-olion skeeman mukaisesti model:in avulla,
@@ -75,13 +83,37 @@ app.post("/api/notes", (request, response) => {
   });
 });
 
-// Poisto tapahtuu tekemällä HTTP DELETE ‑pyyntö resurssin urliin.
-app.delete("/api/notes/:id", (request, response) => {
-  const id = request.params.id;
-  notes = notes.filter((note) => note.id !== id);
+// Poisto tapahtuu Mongoosen metodilla Model.findByIdAndDelete(),
+// mahdollinen virhe siirretään virheidenkäsittelijälle.
+app.delete('/api/notes/:id', (request, response, next) => {
+  Note.findByIdAndDelete(request.params.id)
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
+})
 
-  response.status(204).end();
-});
+// Muokkaustoiminto, jolla voi muuttaa muistiinpanon tärkeyttä, jos tietokannasta
+// ei löydy haettua id:tä => 404, jos löytyy päivitetään sen content- ja
+// important-kentät pyynnön mukana tulleella datalla.
+app.put('/api/notes/:id', (request, response, next) => {
+  const { content, important } = request.body
+
+  Note.findById(request.params.id)
+    .then(note => {
+      if (!note) {
+        return response.status(404).end()
+      }
+
+      note.content = content
+      note.important = important
+
+      return note.save().then((updatedNote) => {
+        response.json(updatedNote)
+      })
+    })
+    .catch(error => next(error))
+})
 
 // Middleware jonka ansiosta saadaan polkujen käsittelemättömistä
 // virhetilanteista JSON-muotoinen virheilmoitus.
@@ -90,6 +122,22 @@ const unknownEndpoint = (request, response) => {
 };
 
 app.use(unknownEndpoint);
+
+// Virheidenkäsittelijä middleware tarkastaa onko kyse CastError-poikkeuksesta 
+// eli virheellisestä olio-id:stä, jos ei ole se siirtää funktiolla next virheen
+// käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
+const errorHandler = (error, request, response, next) => {
+  console.error('Virheinfoa:', error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
+
+// tämä tulee kaikkien muiden middlewarejen ja routejen rekisteröinnin jälkeen!
+app.use(errorHandler)
 
 // kuuntelee porttia 3001 tiedoston .env ympäristömuuttujan PORT avulla
 const PORT = process.env.PORT;
