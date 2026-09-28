@@ -7,8 +7,6 @@ const Note = require("./models/note");
 
 const app = express();
 
-let notes = [];
-
 // Itse määritelty middleware, joka tulostaa npm-konsoliin
 // palvelimelle tulevien pyyntöjen perustietoja,
 // lopussa oleva next() siirtää kontrollin seuraavalle middlewarelle.
@@ -19,6 +17,19 @@ const requestLogger = (request, response, next) => {
   console.log("---");
   next();
 };
+
+// Virheidenkäsittelijä middleware tarkastaa onko kyse CastError-poikkeuksesta 
+// eli virheellisestä olio-id:stä, jos ei ole se siirtää funktiolla next virheen
+// käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
+const errorHandler = (error, request, response, next) => {
+  console.error('Virheinfoa:', error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
 
 // Tarvitaan Expressin middleware static, jotta saa renderöityä tiedoston
 // index.html joka sisältää elementin root, jonka kautta sovellus pääsee
@@ -83,16 +94,6 @@ app.post("/api/notes", (request, response) => {
   });
 });
 
-// Poisto tapahtuu Mongoosen metodilla Model.findByIdAndDelete(),
-// mahdollinen virhe siirretään virheidenkäsittelijälle.
-app.delete('/api/notes/:id', (request, response, next) => {
-  Note.findByIdAndDelete(request.params.id)
-    .then(result => {
-      response.status(204).end()
-    })
-    .catch(error => next(error))
-})
-
 // Muokkaustoiminto, jolla voi muuttaa muistiinpanon tärkeyttä, jos tietokannasta
 // ei löydy haettua id:tä => 404, jos löytyy päivitetään sen content- ja
 // important-kentät pyynnön mukana tulleella datalla.
@@ -115,6 +116,16 @@ app.put('/api/notes/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
+// Poisto tapahtuu Mongoosen metodilla Model.findByIdAndDelete(),
+// mahdollinen virhe siirretään virheidenkäsittelijälle.
+app.delete('/api/notes/:id', (request, response, next) => {
+  Note.findByIdAndDelete(request.params.id)
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
+})
+
 // Middleware jonka ansiosta saadaan polkujen käsittelemättömistä
 // virhetilanteista JSON-muotoinen virheilmoitus.
 const unknownEndpoint = (request, response) => {
@@ -122,20 +133,6 @@ const unknownEndpoint = (request, response) => {
 };
 
 app.use(unknownEndpoint);
-
-// Virheidenkäsittelijä middleware tarkastaa onko kyse CastError-poikkeuksesta 
-// eli virheellisestä olio-id:stä, jos ei ole se siirtää funktiolla next virheen
-// käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
-const errorHandler = (error, request, response, next) => {
-  console.error('Virheinfoa:', error.message)
-
-  if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
-  }
-
-  next(error)
-}
-
 // tämä tulee kaikkien muiden middlewarejen ja routejen rekisteröinnin jälkeen!
 app.use(errorHandler)
 
