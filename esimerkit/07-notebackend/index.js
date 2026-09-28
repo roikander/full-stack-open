@@ -18,18 +18,18 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
-// Virheidenkäsittelijä middleware tarkastaa onko kyse CastError-poikkeuksesta 
+// Virheenkäsittelijä middleware tarkastaa onko kyse CastError-poikkeuksesta
 // eli virheellisestä olio-id:stä, jos ei ole se siirtää funktiolla next virheen
 // käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
 const errorHandler = (error, request, response, next) => {
-  console.error('Virheinfoa:', error.message)
+  console.error("Virheinfoa:", error.message);
 
-  if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
+  if (error.name === "CastError") {
+    return response.status(400).send({ error: "malformatted id" });
   }
 
-  next(error)
-}
+  next(error);
+};
 
 // Tarvitaan Expressin middleware static, jotta saa renderöityä tiedoston
 // index.html joka sisältää elementin root, jonka kautta sovellus pääsee
@@ -59,19 +59,19 @@ app.get("/api/notes", (request, response) => {
 // Yksittäisen resurssin voi hakea antamalla polkuun/URLiin kaksoispisteen
 // jälkeen haettavasta kohteesta löytyvä parametri (tässä id),
 // käsiksi siihen päästään Mongoosen Model.findById() ja request-olion avulla.
-// Jos haettua id:tä ei löydy palautetaan virhekoodi 404, jos haettu id on 
-// väärässä muodossa funktio next siirtää virhetilanteen virheidenkäsittelijälle.
-app.get('/api/notes/:id', (request, response, next) => {
+// Jos haettua id:tä ei löydy palautetaan virhekoodi 404, jos haettu id on
+// väärässä muodossa funktio next siirtää virhetilanteen virheenkäsittelijälle.
+app.get("/api/notes/:id", (request, response, next) => {
   Note.findById(request.params.id)
-    .then(note => {
+    .then((note) => {
       if (note) {
-        response.json(note)
+        response.json(note);
       } else {
-        response.status(404).end()
+        response.status(404).end();
       }
     })
-    .catch(error => next(error))
-})
+    .catch((error) => next(error));
+});
 
 // Uusi muistiinpano lisätään POST-pyynnöllä, jos kenttä content puuttuu -> 400.
 // Note-rakentajafunktio luo uuden note-olion skeeman mukaisesti model:in avulla,
@@ -97,34 +97,34 @@ app.post("/api/notes", (request, response) => {
 // Muokkaustoiminto, jolla voi muuttaa muistiinpanon tärkeyttä, jos tietokannasta
 // ei löydy haettua id:tä => 404, jos löytyy päivitetään sen content- ja
 // important-kentät pyynnön mukana tulleella datalla.
-app.put('/api/notes/:id', (request, response, next) => {
-  const { content, important } = request.body
+app.put("/api/notes/:id", (request, response, next) => {
+  const { content, important } = request.body;
 
   Note.findById(request.params.id)
-    .then(note => {
+    .then((note) => {
       if (!note) {
-        return response.status(404).end()
+        return response.status(404).end();
       }
 
-      note.content = content
-      note.important = important
+      note.content = content;
+      note.important = important;
 
       return note.save().then((updatedNote) => {
-        response.json(updatedNote)
-      })
+        response.json(updatedNote);
+      });
     })
-    .catch(error => next(error))
-})
+    .catch((error) => next(error));
+});
 
 // Poisto tapahtuu Mongoosen metodilla Model.findByIdAndDelete(),
-// mahdollinen virhe siirretään virheidenkäsittelijälle.
-app.delete('/api/notes/:id', (request, response, next) => {
+// mahdollinen virhe siirretään virheenkäsittelijälle errorHandler.
+app.delete("/api/notes/:id", (request, response, next) => {
   Note.findByIdAndDelete(request.params.id)
-    .then(result => {
-      response.status(204).end()
+    .then((result) => {
+      response.status(204).end();
     })
-    .catch(error => next(error))
-})
+    .catch((error) => next(error));
+});
 
 // Middleware jonka ansiosta saadaan polkujen käsittelemättömistä
 // virhetilanteista JSON-muotoinen virheilmoitus.
@@ -134,7 +134,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint);
 // tämä tulee kaikkien muiden middlewarejen ja routejen rekisteröinnin jälkeen!
-app.use(errorHandler)
+app.use(errorHandler);
 
 // kuuntelee porttia 3001 tiedoston .env ympäristömuuttujan PORT avulla
 const PORT = process.env.PORT;
