@@ -1,54 +1,57 @@
-import { useState, useEffect } from 'react'
-import Filter from './components/Filter'
-import PersonForm from './components/PersonForm'
-import Person from './components/Person'
-import Notification from './components/Notification'
-import personService from './services/persons'
+import { useState, useEffect } from "react"
+import Filter from "./components/Filter"
+import PersonForm from "./components/PersonForm"
+import Person from "./components/Person"
+import Notification from "./components/Notification"
+import personService from "./services/persons"
 
 const App = () => {
   const [persons, setPersons] = useState([])
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
-  const [newFilter, setNewFilter] = useState('')
+  const [newName, setNewName] = useState("")
+  const [newNumber, setNewNumber] = useState("")
+  const [newFilter, setNewFilter] = useState("")
   const [showAll, setShowAll] = useState(true)
   const [notice, setNotice] = useState(null)
 
   useEffect(() => {
-    personService
-      .getAll()
-      .then(initialPersons => {
-        setPersons(initialPersons)
-      })
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons)
+    })
   }, [])
 
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: newName,
-      number: newNumber
+      number: newNumber,
     }
 
-    const nameExists = persons.some(person => person.name === newName)
+    const nameExists = persons.some((person) => person.name === newName)
     if (nameExists) {
       alert(`${newName} is already added to phonebook`)
-      setNewName('')
-      setNewNumber('')
+      setNewName("")
+      setNewNumber("")
       return
     }
 
     personService
       .create(personObject)
-      .then(returnedPerson => {
+      .then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson))
-
         setNotice(`Added ${personObject.name}`)
         setTimeout(() => {
           setNotice(null)
-        }, 3000)
-
-        setNewName('')
-        setNewNumber('')
+        }, 5000)
       })
+      .catch(error => {
+        setNotice(error.response.data.error)
+        setTimeout(() => {
+          setNotice(null)
+        }, 5000)
+      })
+
+    setNewName("")
+    setNewNumber("")
   }
 
   const removePerson = (id, name) => {
@@ -56,16 +59,14 @@ const App = () => {
       return
     }
 
-    personService
-      .remove(id)
-      .then(() => {
-        setPersons(persons.filter(person => person.id !== id))
+    personService.remove(id).then(() => {
+      setPersons(persons.filter((person) => person.id !== id))
 
-        setNotice(`Deleted ${name}`)
-        setTimeout(() => {
-          setNotice(null)
-        }, 3000)
-      })
+      setNotice(`Deleted ${name}`)
+      setTimeout(() => {
+        setNotice(null)
+      }, 5000)
+    })
   }
 
   const handleNameChange = (event) => {
@@ -83,8 +84,8 @@ const App = () => {
 
   const personToShow = showAll
     ? persons
-    : persons.filter(person =>
-      person.name.toLowerCase().includes(newFilter.toLowerCase())
+    : persons.filter((person) =>
+      person.name.toLowerCase().includes(newFilter.toLowerCase()),
     )
 
   return (
@@ -99,8 +100,10 @@ const App = () => {
 
       <PersonForm
         addPerson={addPerson}
-        newName={newName} handleNameChange={handleNameChange}
-        newNumber={newNumber} handleNumberChange={handleNumberChange}
+        newName={newName}
+        handleNameChange={handleNameChange}
+        newNumber={newNumber}
+        handleNumberChange={handleNumberChange}
       />
 
       <h3>Numbers</h3>
