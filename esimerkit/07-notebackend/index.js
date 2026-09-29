@@ -18,14 +18,17 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
-// Virheenkäsittelijä middleware tarkastaa onko kyse CastError-poikkeuksesta
-// eli virheellisestä olio-id:stä, jos ei ole se siirtää funktiolla next virheen
-// käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
+// Virheenkäsittelijämiddleware tarkastaa onko kyse CastError-poikkeuksesta
+// eli virheellisestä olio-id:stä tai onko skeemassa määriteltyjä 
+// validointisääntäjä rikottu jos ei ole, se siirtää funktiolla next 
+// virheenkäsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
 const errorHandler = (error, request, response, next) => {
   console.error("Virheinfoa:", error.message);
 
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    return response.status(400).json({ error: error.message });
   }
 
   next(error);
@@ -76,22 +79,21 @@ app.get("/api/notes/:id", (request, response, next) => {
 // Uusi muistiinpano lisätään POST-pyynnöllä, jos kenttä content puuttuu -> 400.
 // Note-rakentajafunktio luo uuden note-olion skeeman mukaisesti model:in avulla,
 // jos pyynnöstä puuttuu kenttä important -> aseta false siihen.
-// luotu note-olio tallennetaan save-metodilla.
-app.post("/api/notes", (request, response) => {
+// luotu note-olio tallennetaan save-metodilla. Lopussa validointivirheet napataan
+// kiinni ja ja annetaan virheenkäsittelijämiddlewaren huolehdittavaksi
+app.post("/api/notes", (request, response, next) => {
   const body = request.body;
-
-  if (!body.content) {
-    return response.status(400).json({ error: "content missing" });
-  }
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
   });
 
-  note.save().then((savedNote) => {
-    response.json(savedNote);
-  });
+  note.save()
+    .then((savedNote) => {
+      response.json(savedNote);
+    })
+    .catch((error) => next(error));
 });
 
 // Muokkaustoiminto, jolla voi muuttaa muistiinpanon tärkeyttä, jos tietokannasta

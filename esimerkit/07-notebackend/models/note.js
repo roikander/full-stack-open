@@ -21,11 +21,17 @@ mongoose.connect(url, { family: 4 })
     console.log("error connecting to MongoDB:", error.message);
   });
 
-// määrittelee minkälaisia dokumentteja tämä kokoelma sisältää
+// määrittelee minkälaisia dokumentteja tämä kokoelma sisältää, kentälle content
+// on asetettu mongoosen validointisääntöjä (required: true = kenttä ei saa olla 
+// tyhjä), kenttä important on määritelty edelleen yksinkertaisemmassa muodossa.
 const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean,
-});
+  content: {
+    type: String,
+    minlength: 5,
+    required: true
+  },
+  important: Boolean
+})
 
 // muotoilee ylhäällä määritellyt Mongoosen palauttamat oliot haluttuun muotoon
 noteSchema.set("toJSON", {
