@@ -11,7 +11,7 @@
     "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rm -rf dist && cd ../../osa2/puhelinluettelo && npm run build && cp -r dist ../../osa3/puhelinluettelon-backend",
-    "deploy:full": "npm run build:ui && git add . && git commit -m tuotantoversio-julkisuuteen && git push"
+    "deploy:full": "npm run build:ui && git add . && git commit -m tehtava-3.18-valmis && git push"
   },
   "dependencies": {
     "dotenv": "^18.0.4",
