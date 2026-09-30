@@ -44,7 +44,7 @@ const App = () => {
         }, 5000)
       })
       .catch(error => {
-        setNotice(error.response.data.error)
+        setNotice(error.response.data.virhe)
         setTimeout(() => {
           setNotice(null)
         }, 5000)
