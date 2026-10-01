@@ -20,7 +20,7 @@ const requestLogger = (request, response, next) => {
 
 // Virheenkäsittelijämiddleware tarkastaa onko kyse CastError-poikkeuksesta
 // eli virheellisestä olio-id:stä tai onko skeemassa määriteltyjä
-// validointisääntäjä rikottu jos ei ole, se siirtää funktiolla next
+// validointisääntöjä rikottu jos ei ole, se siirtää funktiolla next
 // virheenkäsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
 const errorHandler = (error, request, response, next) => {
   console.error("Virheinfoa:", error.message)
@@ -75,7 +75,7 @@ app.get("/api/notes/:id", (request, response, next) => {
     })
     .catch((error) => next(error))
 })
- 
+
 // Note-rakentajafunktio luo uuden note-olion skeeman mukaisesti model:in avulla,
 // jos pyynnöstä puuttuu kenttä important -> aseta false siihen.
 // Luotu note-olio tallennetaan save-metodilla. Lopussa validointivirheet napataan

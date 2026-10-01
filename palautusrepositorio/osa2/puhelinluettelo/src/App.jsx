@@ -44,10 +44,10 @@ const App = () => {
         }, 5000)
       })
       .catch(error => {
-        setNotice(error.response.data.virhe)
+        setNotice(error.response.data.error)
         setTimeout(() => {
           setNotice(null)
-        }, 5000)
+        }, 8000)
       })
 
     setNewName("")
