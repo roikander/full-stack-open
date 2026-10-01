@@ -8,12 +8,17 @@ const app = express()
 let persons = []
 
 const errorHandler = (error, request, response, next) => {
-  console.error("Virheinfoa:", error.message)
-
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" })
-  } else if (error.name === "ValidationError") {
-    return response.status(400).json({ virhe: error.message })
+  } else if (error.name === "ValidationError" && error.errors.name) {
+    return response.status(400).json({
+      error: "Error! Name length must be at least three characters.",
+    })
+  } else if (error.name === "ValidationError" && error.errors.number) {
+    return response.status(400).json({
+      error:
+        "Error! Number has an invalid format, valid numbers for example: 09-1234567 or 040-1234567",
+    })
   }
 
   next(error)
@@ -54,7 +59,6 @@ app.get("/info", (request, response) => {
 
 app.post("/api/persons", (request, response, next) => {
   const body = request.body
-  console.log(body)
 
   if (!body.name || !body.number) {
     return response.status(400).json({
