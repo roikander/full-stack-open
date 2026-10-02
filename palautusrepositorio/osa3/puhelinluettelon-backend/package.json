@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "build:ui": "rm -rf dist && cd ../../osa2/puhelinluettelo && npm run build && cp -r dist ../../osa3/puhelinluettelon-backend",
-    "deploy:full": "npm run build:ui && git add . && git commit -m tehtavat-3.19-3.20-3.21-valmiit && git push"
+    "deploy:full": "npm run build:ui && git add . && git commit -m tehtava-3.22-valmis && git push"
   },
   "dependencies": {
     "dotenv": "^18.0.4",
