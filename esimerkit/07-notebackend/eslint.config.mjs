@@ -5,6 +5,7 @@ import stylisticJs from "@stylistic/eslint-plugin"
 export default [
   js.configs.recommended,
   {
+    // files määrittelee, että ESLint tarkkailee projektin JavaScript-tiedostoja.
     files: ["**/*.js"],
     languageOptions: {
       sourceType: "commonjs",
@@ -14,6 +15,7 @@ export default [
     plugins: {
       "@stylistic/js": stylisticJs,
     },
+    // tässä käyttöön otetaan JS-tyylisääntöjä, esim. ei puolipisteitä ; (semi) 
     rules: {
       '@stylistic/js/indent': ['error', 2],
       '@stylistic/js/linebreak-style': ['error', 'unix'],
