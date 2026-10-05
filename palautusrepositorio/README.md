@@ -8,3 +8,4 @@ Sisältää kurssin tehtävien palautuksia.
 - Osa 1 - Reactin perusteet
 - Osa 2 - Palvelimen kanssa tapahtuva kommunikointi
 - Osa 3 - Palvelimen ohjelmointi NodeJS:n Express-kirjastolla
+- Osa 4 - Express-sovellusten testaaminen, käyttäjänhallinta
