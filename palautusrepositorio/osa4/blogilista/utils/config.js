@@ -1,3 +1,4 @@
+// kaikki ympäristömuuttujat on eriytetty tähän moduuliin
 require('dotenv').config()
 
 const PORT = process.env.PORT

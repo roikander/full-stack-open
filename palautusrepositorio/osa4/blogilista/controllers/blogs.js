@@ -1,5 +1,5 @@
+// kaikki reitit on liitetty allaolevaan router-olioon ja tähän moduuliin
 const blogsRouter = require('express').Router()
-const { request, response } = require('express')
 const Blog = require('../models/blog')
 
 blogsRouter.get('/', (request, response) => {

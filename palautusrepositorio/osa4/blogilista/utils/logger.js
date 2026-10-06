@@ -1,3 +1,4 @@
+// kaikki konsoliin tulostelu on eristetty tähän moduuliin
 const info = (...params) => {
   console.log(...params)
 }
