@@ -1,20 +1,20 @@
-require('dotenv').config()
+//require('dotenv').config()
 const mongoose = require('mongoose')
 
-mongoose.set('strictQuery', false)
+//mongoose.set('strictQuery', false)
 
-const mongoUrl = process.env.MONGODB_URI
+//const mongoUrl = process.env.MONGODB_URI
 
-console.log('connecting to', mongoUrl)
+//console.log('connecting to', mongoUrl)
 
-mongoose
+/*mongoose
   .connect(mongoUrl, { family: 4 })
   .then(() => {
     console.log('connected to MongoDB')
   })
   .catch((error) => {
     console.log('error connecting to MongoDB:', error.message)
-  })
+  })*/
 
 const blogSchema = mongoose.Schema({
   title: {

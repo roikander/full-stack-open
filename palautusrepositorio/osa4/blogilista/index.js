@@ -1,10 +1,14 @@
-require('dotenv').config()
+/*require('dotenv').config()
 const express = require('express')
 const Blog = require('./models/blog')
 
-const app = express()
+const app = express()*/
 
-const errorHandler = (error, request, response, next) => {
+const app = require('./app') // varsinainen Express-sovellus
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+/*const errorHandler = (error, request, response, next) => {
   console.error('Virheinfoa:', error.message)
 
   if (error.name === 'CastError') {
@@ -49,4 +53,8 @@ app.use(errorHandler)
 const PORT = process.env.PORT
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`)
+})*/
+
+app.listen(config.PORT, '0.0.0.0', () => {
+  logger.info(`Server running on port ${config.PORT}`)
 })
