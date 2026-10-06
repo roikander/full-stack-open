@@ -4,6 +4,18 @@ const Blog = require('./models/blog')
 
 const app = express()
 
+const errorHandler = (error, request, response, next) => {
+  console.error('Virheinfoa:', error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  }
+
+  next(error)
+}
+
 app.use(express.json())
 
 app.get('/', (request, response) => {
@@ -16,14 +28,15 @@ app.get('/api/blogs', (request, response) => {
   })
 })
 
-app.post('/api/blogs', (request, response) => {
+app.post('/api/blogs', (request, response, next) => {
   console.log(request.body)
   const blog = new Blog(request.body)
 
   blog.save()
-  .then((result) => {
-    response.status(201).json(result)
-  })
+    .then((result) => {
+      response.status(201).json(result)
+    })
+    .catch((error) => next(error))
 })
 
 const unknownEndpoint = (request, response) => {
@@ -31,6 +44,7 @@ const unknownEndpoint = (request, response) => {
 }
 
 app.use(unknownEndpoint)
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, '0.0.0.0', () => {
