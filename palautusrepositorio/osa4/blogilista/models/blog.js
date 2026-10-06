@@ -1,20 +1,5 @@
-//require('dotenv').config()
+// määrittelee ainostaan skeeman eli millaisen mallin mukaan blogit tehdään
 const mongoose = require('mongoose')
-
-//mongoose.set('strictQuery', false)
-
-//const mongoUrl = process.env.MONGODB_URI
-
-//console.log('connecting to', mongoUrl)
-
-/*mongoose
-  .connect(mongoUrl, { family: 4 })
-  .then(() => {
-    console.log('connected to MongoDB')
-  })
-  .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
-  })*/
 
 const blogSchema = mongoose.Schema({
   title: {
