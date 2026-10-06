@@ -6,4 +6,4 @@ Tehtävissä luodaan palvelimella olevaa toiminnallisuutta Nodella, apuna käyte
 
 #### blogilista
 
-Sovellus jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista.
+Sovellus jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Toteuttaa osissa 0-3 opittuja asioita.
