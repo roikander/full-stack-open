@@ -6,4 +6,4 @@ Tehtävissä luodaan palvelimella olevaa toiminnallisuutta Nodella, apuna käyte
 
 #### blogilista
 
-Sovellus jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Toteuttaa osissa 0-3 opittuja asioita.
+Sovellus jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Erona aiempaan muistiinpanot -ja puhelinluettelosovellukseen on se että sen rakenne eroaa em. siinä että rakenne on totetettu kurssin sanoin: "noudattamaan paremmin Noden yleisiä konventioita ja Express-sovellus sekä sen käynnistymisestä ja verkkoasetuksista huolehtiva koodi on eriytetty toisistaan [parhaita](https://dev.to/nermine-slimane/always-separate-app-and-server-files--1nc7) käytänteitä noudattaen.
