@@ -30,4 +30,4 @@ Sisältää kurssin osassa 0 olleen muistiinpanosovelluksen [Notes -- single pag
 
 #### 07-notebackend
 
-Kyseessä on Nodella Express-kirjastoa apuna käyttäen luotu web-palvelin, jolla voi toteuttaa HTTP-pyyntöjä ja vastauksia. Sovelluksessa käytetään VSCoden REST client laajennusta ja sen tiedostoja palvelimen testaukseen. Sisältää myös kaksi itse määriteltyä middlewarea ja Expressin virheidenkäsittelijä middlewaren. Toimii yhdessä sovelluksen frontendin kanssa (06-muistiinpanot) muodostaen full stackin, datan tallennus on toteutettu MongoDB-tietokannalla, sovellus on viety Internetiin hostauspalvelulla nimeltä Render.
+Kyseessä on Nodella Express-kirjastoa apuna käyttäen luotu web-palvelin, jolla voi toteuttaa HTTP-pyyntöjä ja vastauksia. Sovelluksessa käytetään VSCoden REST client laajennusta ja sen tiedostoja palvelimen testaukseen. Sisältää myös itse määriteltyjä middlewareja ja Expressin virheidenkäsittelijä middlewareja. Toimii yhdessä sovelluksen frontendin kanssa (06-muistiinpanot) muodostaen full stackin, datan tallennus on toteutettu MongoDB-tietokannalla, sovellus on viety Internetiin hostauspalvelulla nimeltä Render.
