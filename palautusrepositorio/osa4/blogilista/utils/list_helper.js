@@ -4,14 +4,15 @@ const dummy = (blogs) => {
 }
 
 const totalLikes = (blogs) => {
-  //console.log('Blogeja on yhteensä:', blogs.length)
-  //console.log('Blogin saamat tykkäykset:', blogs[0].likes)
+  const likes = blogs.map(blog => blog.likes)
+
   const reducer = (sum, item) => {
     return sum + item
   }
-  return blogs.length === 0
+
+  return likes.length === 0
     ? 0
-    : blogs[0].likes
+    : likes.reduce(reducer, 0)
 }
 
 module.exports = {
