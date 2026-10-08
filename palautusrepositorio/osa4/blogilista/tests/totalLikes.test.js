@@ -1,9 +1,17 @@
-// testaa palauttaako apufunktio totalLikes blogien tykkäysten yhteissumman
+// Testaa erikokoisilla blogilistoilla palauttaako apufunktio 
+// totalLikes oikean summan kun jokaisen blogin tykkäykset lasketaan
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 
 describe('total likes', () => {
+  const emptyList = []
+
+  test('of empty list is zero', () => {
+    const result = listHelper.totalLikes(emptyList)
+    assert.strictEqual(result, 0)
+  })
+
   const listWithOneBlog = [
     {
       _id: '5a422aa71b54a676234d17f8',
