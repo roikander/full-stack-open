@@ -4,9 +4,10 @@ const dummy = (blogs) => {
 }
 
 const totalLikes = (blogs) => {
-  console.log(blogs)
+  console.log('Blogeja on yhteensä:', blogs.length)
 }
 
 module.exports = {
-  dummy
+  dummy,
+  totalLikes
 }
