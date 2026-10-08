@@ -1,4 +1,4 @@
-// testaa palauttaako funktio totalLikes blogien tykkäysten yhteissumman
+// testaa palauttaako apufunktio totalLikes blogien tykkäysten yhteissumman
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')

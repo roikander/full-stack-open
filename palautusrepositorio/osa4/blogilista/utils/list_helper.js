@@ -1,4 +1,4 @@
-// sisältää blogilistan yksikkötestaukseen tarkoitettuja funktioita
+// sisältää blogilistan yksikkötestaukseen tarkoitettuja apufunktioita
 const dummy = (blogs) => {
   return 1
 }

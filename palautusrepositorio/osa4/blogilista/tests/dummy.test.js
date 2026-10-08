@@ -1,4 +1,4 @@
-// sisältää yksikkötestin joka testaa, että funktio dummy palauttaa aina 1
+// sisältää yksikkötestin joka testaa, että apufunktio dummy palauttaa aina 1
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
