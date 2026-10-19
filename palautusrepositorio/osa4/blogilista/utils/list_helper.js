@@ -1,4 +1,4 @@
-// sisältää blogilistan yksikkötestaukseen tarkoitettuja apufunktioita
+// sisältää blogilistan yksikkötestaukseen tarkoitettuja (apu)funktioita
 const dummy = (blogs) => {
   return 1
 }
@@ -15,7 +15,18 @@ const totalLikes = (blogs) => {
     : likes.reduce(reducer, 0)
 }
 
+const favoriteBlog = (blogs) => {
+  const likes = blogs.map(blog => blog.likes)
+
+  const mostLikes = Math.max(...likes)
+
+  const wholeBlog = blogs.find((blog) => blog.likes === mostLikes)
+
+  return wholeBlog
+}
+
 module.exports = {
   dummy,
-  totalLikes
+  totalLikes,
+  favoriteBlog
 }

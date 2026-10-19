@@ -50,3 +50,4 @@ describe('total likes', () => {
     assert.strictEqual(result, 41)
   }) 
 })
+
