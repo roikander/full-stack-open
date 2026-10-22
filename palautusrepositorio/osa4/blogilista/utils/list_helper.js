@@ -1,3 +1,5 @@
+const blog = require("../models/blog")
+
 // sisältää blogilistan yksikkötestaukseen tarkoitettuja (apu)funktioita
 const dummy = (blogs) => {
   return 1

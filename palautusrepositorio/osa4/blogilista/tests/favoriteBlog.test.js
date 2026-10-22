@@ -1,5 +1,5 @@
 // Testaa että funktio favoriteBlog palauttaa eniten tykkäyksiä saaneen blogin,
-// jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
+// jos suosikkeja on monta, riittää että funktio palauttaa yhden niistä.
 const { test, describe } = require('node:test')
 const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
