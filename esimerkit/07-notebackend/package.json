@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",    
     "build:ui": "rm -rf dist && cd ../06-muistiinpanot && npm run build && cp -r dist ../07-notebackend",
-    "deploy:full": "npm run build:ui && git add . && git commit -m julkinen-tuotantoversio && git push"
+    "deploy:full": "npm run build:ui && git add . && git commit -m haavoittuvuuskorjaukset-muistiinpanojen-julkisiin-versioihin && git push"
   },
   "dependencies": {
     "dotenv": "^18.0.3",
