@@ -1,10 +1,12 @@
+// sisältää blogilistan yksikkötestaukseen tarkoitettuja (apu)funktioita
 const blog = require("../models/blog")
 
-// sisältää blogilistan yksikkötestaukseen tarkoitettuja (apu)funktioita
+// saa parametriksi taulukollisen blogeja ja palauttaa aina 1
 const dummy = (blogs) => {
   return 1
 }
 
+// saa taulukollisen blogeja joista se palauttaa kentän likes summan
 const totalLikes = (blogs) => {
   const likes = blogs.map(blog => blog.likes)
 
@@ -17,6 +19,7 @@ const totalLikes = (blogs) => {
     : likes.reduce(reducer, 0)
 }
 
+// saa taulukollisen blogeja, joista palauttaa eniten tykätyn
 const favoriteBlog = (blogs) => {
   const likes = blogs.map(blog => blog.likes)
 
