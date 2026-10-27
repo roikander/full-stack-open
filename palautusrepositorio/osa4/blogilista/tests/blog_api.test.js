@@ -44,6 +44,24 @@ test('blogs identifier is in form: id', async () => {
   assert.ok(response.body.every(blog => blog._id === undefined))  
 })
 
+test('new blog can be added', async () => {
+  const newBlog = {
+    "title": "Tests using Jest and Supertest",
+    "author": "Ravi Bhuvan",
+    "url": "https://dev.to/algon31/tests-using-jest-and-supertest-47l2",
+    "likes": 0,
+    "id": "6ac75bd371b8e9b18b1ca827"
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+
+  const response = await api.get('/api/blogs')
+  assert.strictEqual(response.body.length, initialBlogs.length +1)
+}) 
+
 // lopuksi suljetaan tietokantayhteys ja palvelin
 after(async () => {
   await mongoose.connection.close()
