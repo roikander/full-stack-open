@@ -14,18 +14,18 @@ const api = supertest(server)
 
 const initialBlogs = [
   {
-    "title": "Always separate app and server files !",
-    "author": "nermineslimane",
-    "url": "https://dev.to/nermine-slimane/always-separate-app-and-server-files--1nc7",
-    "likes": 30,
-    "id": "6ac3d4ae72dda8e0304d8c1b"
+    "title": "API-endpoint test training",
+    "author": "Taru Testi",
+    "url": "taru.netti",
+    "likes": 7,
+    "id": "6ac3d4ae72dda8e0304d8c17"
   },
   {
-    "title": "Naming files and directories in JavaScript projects",
-    "author": "Kevan Stannard",
-    "url": "https://dev.to/kevanstannard/naming-files-and-directories-in-javascript-projects-35e4",
-    "likes": 11,
-    "id": "6ac75bd371b8e9b18b1ca820"
+    "title": "Testit kuntoon!",
+    "author": "Tero Testi",
+    "url": "tero.netti",
+    "likes": 1,
+    "id": "6ac75bd371b8e9b18b1ca827"
   }
 ]
 
@@ -42,10 +42,10 @@ test('all blogs are returned', async () => {
 test('blogs identifier is in form: id', async () => {
   const response = await api.get('/api/blogs')
   assert.ok(response.body.every(blog => blog.id !== undefined))
-  assert.ok(response.body.every(blog => blog._id === undefined))  
+  assert.ok(response.body.every(blog => blog._id === undefined))
 })
 
-test('new blog with required field and values +', async () => {
+test('new blog with required properties and values added', async () => {
   const newBlog = {
     "title": "kaikki messiin",
     "author": "Esa",
@@ -63,9 +63,9 @@ test('new blog with required field and values +', async () => {
   assert.strictEqual(response.body.length, initialBlogs.length + 1)
 })
 
-test('new blog without likes-field or its value empty +', async () => {
+test('if property likes is missing, set zero there', async () => {
   const newBlog = {
-    "title": "likes-kenttää ei ollenkaan pyynnössä mukana",
+    "title": "likes-kenttä puuttuu/puuttui",
     "author": "Pekka",
     "url": "Pekka.net",
     "id": "456"
@@ -78,6 +78,34 @@ test('new blog without likes-field or its value empty +', async () => {
 
   const response = await api.get('/api/blogs')
   assert.strictEqual(response.body.length, initialBlogs.length + 1)
+})
+
+test('if property title is missing, response with 400 Bad Request', async () => {
+  const newBlog = {
+    "author": "TitleMissing",
+    "url": "titlemissing.net",
+    "likes": 1000,
+    "id": "789"
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
+test('if property url is missing, response with 400 Bad Request', async () => {
+  const newBlog = {
+    "title": "kenttä url puuttuu",
+    "author": "SuperTest",
+    "likes": 12,
+    "id": "1011"
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
 })
 
 // lopuksi suljetaan tietokantayhteys ja palvelin
