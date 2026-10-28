@@ -1,3 +1,4 @@
+// sisältää testejä sovelluksen API-reitteihin, integraatiotestausta
 const assert = require('node:assert')
 const { test, after, beforeEach } = require('node:test')
 const mongoose = require('mongoose')
@@ -44,13 +45,13 @@ test('blogs identifier is in form: id', async () => {
   assert.ok(response.body.every(blog => blog._id === undefined))  
 })
 
-test('new blog can be added', async () => {
+test('new blog with required field and values +', async () => {
   const newBlog = {
-    "title": "Tests using Jest and Supertest",
-    "author": "Ravi Bhuvan",
-    "url": "https://dev.to/algon31/tests-using-jest-and-supertest-47l2",
-    "likes": 0,
-    "id": "6ac75bd371b8e9b18b1ca827"
+    "title": "kaikki messiin",
+    "author": "Esa",
+    "url": "Esa.net",
+    "likes": 85000,
+    "id": "123"
   }
 
   await api
@@ -59,8 +60,25 @@ test('new blog can be added', async () => {
     .expect(201)
 
   const response = await api.get('/api/blogs')
-  assert.strictEqual(response.body.length, initialBlogs.length +1)
-}) 
+  assert.strictEqual(response.body.length, initialBlogs.length + 1)
+})
+
+test('new blog without likes-field or its value empty +', async () => {
+  const newBlog = {
+    "title": "likes-kenttää ei ollenkaan pyynnössä mukana",
+    "author": "Pekka",
+    "url": "Pekka.net",
+    "id": "456"
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+
+  const response = await api.get('/api/blogs')
+  assert.strictEqual(response.body.length, initialBlogs.length + 1)
+})
 
 // lopuksi suljetaan tietokantayhteys ja palvelin
 after(async () => {
