@@ -76,7 +76,7 @@ test('if property likes is missing, set zero there', async () => {
   assert.strictEqual(response.body.length, initialBlogs.length + 1)
 })
 
-/*test('if property title is missing, response with 400 Bad Request', async () => {
+test('if property title is missing, response with 400 Bad Request', async () => {
   const newBlog = {
     "author": "TitleMissing",
     "url": "titlemissing.net",
@@ -100,7 +100,7 @@ test('if property url is missing, response with 400 Bad Request', async () => {
     .post('/api/blogs')
     .send(newBlog)
     .expect(400)
-})*/
+})
 
 // lopuksi suljetaan tietokantayhteys ja palvelin
 after(async () => {
