@@ -6,7 +6,7 @@ Tämä repositorio sisältää Helsingin yliopiston Full Stack Open-kurssin teht
 
 Kurssilla tekemäni puhelinluettelosovellus, joka on viety Internetiin hostauspalvelulla nimeltä Render:
 
-👉 **Phonebook:** https://full-stack-open-lc9q.onrender.com/
+👉 **Phonebook:** https://phonebook-rtqz.onrender.com/
 
 Kurssin esimerkeissä toteutettu muistiinpanosovellus, jota olen täydentänyt omilla kommenteilla ja pienillä muutoksilla sovelluksen koodiin:
 
