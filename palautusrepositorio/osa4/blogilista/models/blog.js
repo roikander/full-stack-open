@@ -18,6 +18,11 @@ const blogSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  // taulukko jossa on käyttäjien id:t ja viittauksen User-modeliin (user.js)
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 })
 
 blogSchema.set('toJSON', {
