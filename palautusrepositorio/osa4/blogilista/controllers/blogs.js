@@ -4,7 +4,7 @@ const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 
 // reittioliolle on määritelty jo tiedostossa app.js polku 'api/blogs'
-// hakee tietokannasta blogit mongoosen metodilla find
+// hakee tietokannasta kaikki blogit mongoosen metodilla find
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({})
   response.json(blogs)

@@ -5,6 +5,13 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
 // reittioliolle on määritelty jo tiedostossa app.js polku 'api/users'
+// hakee tietokannasta kaikki käyttäjät mongoosen metodilla find
+usersRouter.get('/', async (request, response) => {
+  const users = await User.find({})
+  response.json(users)
+})
+
+// reittioliolle on määritelty jo tiedostossa app.js polku 'api/users'
 // jos kyseessä on eka POST-pyyntö polkuun, luo uuden tietokantakokoelman
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
@@ -19,7 +26,7 @@ usersRouter.post('/', async (request, response) => {
     name,
     passwordHash,
   })
-  
+
   // ja tallentaa sen käyttäjädokumentin tietokantaan
   const savedUser = await user.save()
 
