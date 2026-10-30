@@ -15,6 +15,7 @@ blogsRouter.get('/', async (request, response) => {
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
 
+  // luo uuden blogin, 
   const blog = new Blog({
     title: body.title,
     author: body.author,
@@ -22,6 +23,7 @@ blogsRouter.post('/', async (request, response) => {
     likes: body.likes || 0,
   })
 
+  // ja tallentaa sen blogidokumentin tietokantaan
   const savedBlog = await blog.save()
   response.status(201).json(savedBlog)
 })
