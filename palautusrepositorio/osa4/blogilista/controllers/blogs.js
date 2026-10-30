@@ -1,5 +1,6 @@
-// kaikki API-reitit on liitetty allaolevaan router-olioon ja tähän moduuliin
+// blogien reitteihin tulevat pyynnöt määrittelevä reittiolio blogsRouter
 const blogsRouter = require('express').Router()
+// lataa mallin ja ottaa sen käyttöön allaolevasta tiedostosta
 const Blog = require('../models/blog')
 
 // reittioliolle on määritelty jo tiedostossa app.js polku 'api/blogs'
@@ -9,6 +10,7 @@ blogsRouter.get('/', async (request, response) => {
   response.json(blogs)
 })
 
+// jos kyseessä on eka POST-pyyntö polkuun, luo uuden tietokantakokoelman
 // jos kenttää likes ei ole nimetty tai sen arvo on tyhjä, asetetaan 0 siihen
 blogsRouter.post('/', async (request, response) => {
   const body = request.body

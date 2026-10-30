@@ -1,4 +1,4 @@
-// määrittelee ainostaan skeeman eli millaisen mallin mukaan käyttäjät tehdään
+// määrittelee skeeman eli millaisen mallin mukaan käyttäjät tehdään
 const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
@@ -24,6 +24,7 @@ userSchema.set('toJSON', {
   }
 })
 
+// luo mallin, joka määrittelee, millaisia käyttäjädokumentteja luodaan.
 const User = mongoose.model('User', userSchema)
 
 module.exports = User

@@ -1,4 +1,4 @@
-// määrittelee ainostaan skeeman eli millaisen mallin mukaan blogit tehdään
+// määrittelee skeeman eli millaisen mallin mukaan blogit tehdään
 const mongoose = require('mongoose')
 
 const blogSchema = mongoose.Schema({
@@ -25,6 +25,7 @@ const blogSchema = mongoose.Schema({
   }
 })
 
+// // luo mallin, joka määrittelee, millaisia blogidokumentteja luodaan.
 blogSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
