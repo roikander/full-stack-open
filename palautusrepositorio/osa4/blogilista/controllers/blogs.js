@@ -7,7 +7,8 @@ const User = require('../models/user')
 // reittioliolle on määritelty jo tiedostossa app.js polku 'api/blogs'
 // hakee tietokannasta kaikki blogit mongoosen metodilla find
 blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({})
+  const blogs = await Blog
+  .find({}).populate('user', { username: 1, name: 1 })
   response.json(blogs)
 })
 
@@ -23,7 +24,7 @@ blogsRouter.post('/', async (request, response) => {
   if (!user) {
     return response.status(400).json({ error: 'userId missing or not valid' })
   }
-  
+
   // luo uuden blogin, 
   const blog = new Blog({
     title: body.title,
