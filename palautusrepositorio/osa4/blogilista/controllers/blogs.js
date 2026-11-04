@@ -17,12 +17,13 @@ blogsRouter.post('/', async (request, response) => {
   const body = request.body
 
   // etsii löytyykö tietokannasta pyynnön tehnyt käyttäjä/id
+  // body.userId -> pyynnössä id-kenttä pitää olla muodossa "userId": "<...>"
   const user = await User.findById(body.userId)
   
   if (!user) {
     return response.status(400).json({ error: 'userId missing or not valid' })
   }
-
+  
   // luo uuden blogin, 
   const blog = new Blog({
     title: body.title,
