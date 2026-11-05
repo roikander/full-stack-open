@@ -29,6 +29,7 @@ loginRouter.post('/', async (request, response) => {
   // jos salasana on oikein luodaan digitaalisesti allekirjoitetut valtuudet
   const token = jwt.sign(userForToken, process.env.SECRET)
 
+  // vastauksessa palautetaan myös token jonka avulla jatko-operaatiot onnistuu 
   response
     .status(200)
     .send({ token, username: user.username, name: user.name })
