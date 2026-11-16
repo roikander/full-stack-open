@@ -9,3 +9,4 @@ Sisältää kurssin tehtävien palautuksia.
 - Osa 2 - Palvelimen kanssa tapahtuva kommunikointi
 - Osa 3 - Palvelimen ohjelmointi NodeJS:n Express-kirjastolla
 - Osa 4 - Express-sovellusten testaaminen, käyttäjänhallinta
+- Osa 5 - React-sovelluksen testaaminen, React Router
