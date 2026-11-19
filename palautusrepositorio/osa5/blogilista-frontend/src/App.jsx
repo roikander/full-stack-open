@@ -9,6 +9,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+  // effect hook, joka hakee kaikki blogit vain ekalla renderöinnillä koska [] 
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
@@ -20,8 +21,14 @@ const App = () => {
 
     try {
       const user = await loginService.login({ username, password })
+
+      // jos kirjautumistiedot ovat ok, tallenna käyttäjä local storageen
+      window.localStorage.setItem(
+        'loggedNoteappUser', JSON.stringify(user)
+      )
+      // jos kirjautumistiedot ovat ok, tallenna käyttäjä sovelluksen tilaan   
       setUser(user)
-      console.log('loginServicen palautuksesta user.name ->', user.name)
+      console.log('loginServicen vastauksesta, user.name ->', user.name)
       setUsername('')
       setPassword('')
     } catch (error) {
