@@ -23,9 +23,7 @@ const App = () => {
       const user = await loginService.login({ username, password })
 
       // jos kirjautumistiedot ovat ok, tallenna käyttäjä local storageen
-      window.localStorage.setItem(
-        'loggedNoteappUser', JSON.stringify(user)
-      )
+      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
       // jos kirjautumistiedot ovat ok, tallenna käyttäjä sovelluksen tilaan   
       setUser(user)
       console.log('loginServicen vastauksesta, user.name ->', user.name)
@@ -34,6 +32,12 @@ const App = () => {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const handleLogout = async event => {
+    event.preventDefault()
+    window.localStorage.removeItem('loggedNoteappUser')
+    setUser(null)
   }
 
   if (user === null) {
@@ -72,7 +76,7 @@ const App = () => {
       <h2>blogs</h2>
       <div>
         {user.name} logged in
-        <button type='submit'>logout</button>
+        <button onClick={handleLogout}>logout</button>
       </div>
       <br/>
       {blogs.map(blog =>
