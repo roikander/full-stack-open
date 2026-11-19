@@ -18,15 +18,16 @@ const App = () => {
 
   const handleLogin = async event => {
     event.preventDefault()
-
     try {
       const user = await loginService.login({ username, password })
 
       // jos kirjautumistiedot ovat ok, tallenna käyttäjä local storageen
       window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
-      // jos kirjautumistiedot ovat ok, tallenna käyttäjä sovelluksen tilaan   
+
+      // jos kirjautumistiedot ovat ok, aseta token linkittymään käyttäjään     
+      blogService.setToken(user.token)
+      // ja tallenna kyseinen tunnistettu käyttäjä sovelluksen tilaan 
       setUser(user)
-      console.log('loginServicen vastauksesta, user.name ->', user.name)
       setUsername('')
       setPassword('')
     } catch (error) {
@@ -34,10 +35,11 @@ const App = () => {
     }
   }
 
+  // tämän avulla käyttäjä kirjautuu ulos ja selain unohtaa hänet
   const handleLogout = async event => {
     event.preventDefault()
-    window.localStorage.removeItem('loggedNoteappUser')
     setUser(null)
+    window.localStorage.removeItem('loggedNoteappUser')
   }
 
   if (user === null) {
@@ -78,7 +80,7 @@ const App = () => {
         {user.name} logged in
         <button onClick={handleLogout}>logout</button>
       </div>
-      <br/>
+      <br />
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
