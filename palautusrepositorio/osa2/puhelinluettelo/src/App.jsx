@@ -47,7 +47,7 @@ const App = () => {
         setNotice(error.response.data.error)
         setTimeout(() => {
           setNotice(null)
-        }, 8000)
+        }, 7000)
       })
 
     setNewName("")
