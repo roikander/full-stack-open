@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
+import Notification from "./components/Notification"
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -11,6 +12,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [notice, setNotice] = useState(null)  
 
   // effect hook, joka hakee kaikki blogit vain ekalla renderöinnillä koska [] 
   useEffect(() => {
@@ -39,6 +41,10 @@ const App = () => {
 
     blogService.create(blogObject).then(returnedBlog => {
       setBlogs(blogs.concat(returnedBlog))
+      setNotice(`a new blog "${blogObject.title}" added`)
+      setTimeout(() => {
+        setNotice(null)
+      }, 5000)
       setNewTitle('')
       setNewAuthor('')
       setNewUrl('')
@@ -70,7 +76,7 @@ const App = () => {
     setUser(null)
     window.localStorage.removeItem('loggedNoteappUser')
   }
-  
+
   const handleTitleChange = event => {
     setNewTitle(event.target.value)
   }
@@ -141,6 +147,9 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+
+      <Notification message={notice} />
+
       <div>
         {user.name} logged in
         <button onClick={handleLogout}>logout</button>
