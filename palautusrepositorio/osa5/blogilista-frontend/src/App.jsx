@@ -5,6 +5,9 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [newTitle, setNewTitle] = useState('')
+  const [newAuthor, setNewAuthor] = useState('')
+  const [newUrl, setNewUrl] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -15,6 +18,32 @@ const App = () => {
       setBlogs(blogs)
     )
   }, [])
+
+  // pitää käyttäjän kirjautuneena jos sivun päivittää
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
+  const addBlog = event => {
+    event.preventDefault()
+    const blogObject = {
+      title: newTitle,
+      author: newAuthor,
+      url: newUrl
+    }
+
+    blogService.create(blogObject).then(returnedBlog => {
+      setBlogs(blogs.concat(returnedBlog))
+      setNewTitle('')
+      setNewAuthor('')
+      setNewUrl('')
+    })
+  }
 
   const handleLogin = async event => {
     event.preventDefault()
@@ -42,6 +71,28 @@ const App = () => {
     window.localStorage.removeItem('loggedNoteappUser')
   }
 
+  const handleTitleChange = event => {
+    setNewTitle(event.target.value)
+  }
+
+  const handleAuthorChange = event => {
+    setNewAuthor(event.target.value)
+  }
+
+  const handleUrlChange = event => {
+    setNewUrl(event.target.value)
+  }
+
+  const blogForm = () => (
+    <form onSubmit={addBlog}>
+      title:<input value={newTitle} onChange={handleTitleChange} /> <br />
+      author:<input value={newAuthor} onChange={handleAuthorChange} /> <br />
+      url:<input value={newUrl} onChange={handleUrlChange} /> <br />
+      <button type="submit">create</button>
+    </form>
+  )
+
+  // renderöi nämä, jos käyttäjä ei ole kirjautuneena
   if (user === null) {
     return (
       <div>
@@ -73,19 +124,27 @@ const App = () => {
     )
   }
 
+  // renderöi nämä, jos käyttäjä on kirjautuneena
   return (
     <div>
       <h2>blogs</h2>
+
       <div>
         {user.name} logged in
         <button onClick={handleLogout}>logout</button>
       </div>
-      <br />
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+
+      <h2>create new</h2>
+
+      <div>
+        {blogForm()}
+        {blogs.map(blog =>
+          <Blog key={blog.id} blog={blog} />
+        )}
+      </div>
     </div>
   )
 }
+
 
 export default App

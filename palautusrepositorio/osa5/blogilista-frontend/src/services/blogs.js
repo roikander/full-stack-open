@@ -14,12 +14,12 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-// ja config asettaa muuttujan token Authorization-headerin avaimeksi
 const create = async newObject => {
+  // config luo headerin jonka avaimena on ylempänä luotu token eli tunniste
   const config = {
     headers: { Authorization: token }
   }
-
+  // lähettää peruspolkuunsa uuden blogi-olion ja valtuutustiedot 
   const response = await axios.post(baseUrl, newObject, config)
   return response.data
 }
