@@ -12,7 +12,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [notice, setNotice] = useState(null)  
+  const [notice, setNotice] = useState(null)
 
   // effect hook, joka hakee kaikki blogit vain ekalla renderöinnillä koska [] 
   useEffect(() => {
@@ -55,7 +55,7 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({ username, password })
-
+      
       // jos kirjautumistiedot ovat ok, tallenna käyttäjä local storageen
       window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
 
@@ -65,17 +65,25 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (error) {
-      console.log(error)
+    } catch {
+      setNotice('wrong username or password')
+      setTimeout(() => {
+        setNotice(null)
+      }, 5000)
     }
   }
 
   // tämän avulla käyttäjä kirjautuu ulos ja selain unohtaa hänet
   const handleLogout = async event => {
     event.preventDefault()
+
+    setTimeout(() => {
+      setNotice(null)
+    }, 5000)
     setUser(null)
     window.localStorage.removeItem('loggedNoteappUser')
   }
+
 
   const handleTitleChange = event => {
     setNewTitle(event.target.value)
@@ -116,6 +124,9 @@ const App = () => {
     return (
       <div>
         <h2>log in to application</h2>
+
+        <Notification message={notice} />
+
         <form onSubmit={handleLogin}>
           <div>
             <label>
