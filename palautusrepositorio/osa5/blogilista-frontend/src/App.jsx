@@ -70,24 +70,37 @@ const App = () => {
     setUser(null)
     window.localStorage.removeItem('loggedNoteappUser')
   }
-
+  
   const handleTitleChange = event => {
     setNewTitle(event.target.value)
   }
-
   const handleAuthorChange = event => {
     setNewAuthor(event.target.value)
   }
-
   const handleUrlChange = event => {
     setNewUrl(event.target.value)
   }
 
   const blogForm = () => (
     <form onSubmit={addBlog}>
-      title:<input value={newTitle} onChange={handleTitleChange} /> <br />
-      author:<input value={newAuthor} onChange={handleAuthorChange} /> <br />
-      url:<input value={newUrl} onChange={handleUrlChange} /> <br />
+      <div>
+        <label>
+          title:
+          <input type='text' value={newTitle} onChange={handleTitleChange} />
+        </label>
+      </div>
+      <div>
+        <label>
+          author:
+          <input type='text' value={newAuthor} onChange={handleAuthorChange} />
+        </label>
+      </div>
+      <div>
+        <label>
+          url:
+          <input type='text' value={newUrl} onChange={handleUrlChange} />
+        </label>
+      </div>
       <button type="submit">create</button>
     </form>
   )
@@ -128,14 +141,12 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-
       <div>
         {user.name} logged in
         <button onClick={handleLogout}>logout</button>
       </div>
 
       <h2>create new</h2>
-
       <div>
         {blogForm()}
         {blogs.map(blog =>
@@ -145,6 +156,5 @@ const App = () => {
     </div>
   )
 }
-
 
 export default App
